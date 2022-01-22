@@ -1,0 +1,39 @@
+version: '3.6'
+services:
+  fileserver:
+    restart: always
+    build:
+        context: ./fileserver
+        dockerfile: Dockerfile
+  postgres:
+    image: postgres:12
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+  graphql-engine:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+    - "8080:8080"
+    restart: always
+    depends_on:
+      - "postgres"
+      - "fileserver"
+  frontend:
+    restart: always
+    ports:
+      - "4200:4200"
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - "graphql-engine"
+volumes:
+  db_data:
+

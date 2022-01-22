@@ -1,0 +1,10 @@
+type Query {
+  technologies: [Technology]
+}
+
+type Technology {
+  id: Int!
+  title: String!
+  description: String!
+}
+
