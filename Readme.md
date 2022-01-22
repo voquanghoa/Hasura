@@ -6,8 +6,8 @@
 docker-compose up -d --build
 ```
 
-- Frontend (http://localhost:4200)[http://localhost:4200]
-- Hasura backend (http://localhost:8080)[http://localhost:8080]
+- Frontend [http://localhost:4200](http://localhost:4200)
+- Hasura backend [http://localhost:8080](http://localhost:8080)
 
 
 # List commands
