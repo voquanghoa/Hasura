@@ -1,6 +1,9 @@
+import type { TechnologyLongTail } from "../models/technology.longtail";
+import type { HasuraResponse } from "../models/hasura.response";
+
 const base = "http://localhost:8080/v1/graphql";
 
-async function fetchGraphQL(operationsDoc, operationName, variables) {
+async function fetchGraphQL(operationsDoc, operationName, variables): Promise<any> {
     const result = await fetch(
         base,
         {
@@ -29,10 +32,10 @@ const operationsDoc = `
   }
 `;
 
-export function fetchFindTechnology(tail: string) {
+export function fetchFindTechnology(tail: string): Promise<HasuraResponse<TechnologyLongTail>> {
     return fetchGraphQL(
         operationsDoc,
         "FindTechnology",
-        {"tail": tail}
+        { tail }
     );
 }

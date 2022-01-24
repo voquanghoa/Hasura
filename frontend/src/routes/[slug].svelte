@@ -3,38 +3,56 @@
 </script>
 
 <svelte:head>
-    <title>Helps</title>
+    <title>Technology</title>
 </svelte:head>
 
 <div class="technology">
-    <strong>{title}</strong>
-    <br/>
-    <br/>
-    {description}
+    {#if apiState === ApiState.LOADING }
+        <span>Loading...</span>
+    {/if}
+
+    {#if apiState === ApiState.SUCCESS }
+        <strong class="title">
+            {technology.title}
+        </strong>
+        <span>
+            {technology.description}
+        </span>
+    {/if}
+
+    {#if apiState === ApiState.FAILED }
+        <span>Sorry, the technology couldn't be loaded.</span>
+    {/if}
 </div>
 
 <script lang="ts">
-    import { page } from '$app/stores';
-    import {fetchFindTechnology} from "./_api";
+    import { page } from '$app/stores'
+    import { fetchFindTechnology } from "../services/_api"
+    import { ApiState } from "../models/api.state"
+    import { emptyTechnology } from "../models/technology";
 
-    let title = ''
-    let description = ''
+    let apiState = ApiState.NONE
+    let technology = emptyTechnology
+
     $: slug = $page.params.slug
 
     async function loadData(slug: string) {
         if (!slug) return
-        const data = await fetchFindTechnology(slug)
+        try {
+            apiState = ApiState.LOADING
+            const data = await fetchFindTechnology(slug)
 
-        if (!data.data.long_tails) {
-            title = 'Not found';
-            return;
+            if (!data.data.long_tails) {
+                apiState = ApiState.FAILED
+                return;
+            }
+
+            const id = data.data.long_tails[0].json_id
+            technology = data.data.technologies.find(x => x.id === id);
+            apiState = ApiState.SUCCESS
+        } catch {
+            apiState = ApiState.FAILED
         }
-
-        const id = data.data.long_tails[0].json_id
-        const entry = data.data.technologies.find(x => x.id === id);
-
-        title = entry.title
-        description = entry.description
     }
 
     $: {
@@ -46,5 +64,10 @@
     .technology {
         margin: 40px auto;
         font-size: 20px;
+    }
+
+    .technology .title {
+        display: block;
+        margin-bottom: 40px;
     }
 </style>
