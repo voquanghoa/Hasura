@@ -2,16 +2,10 @@
 
 ## Setup and run on Docker
 
-- Build the images and run
-
-```bash
-docker-compose up -d --build
-```
-
 - Build the images and run with changes detection and reload for Frontend
 
 ```bash
-docker-compose up --build
+docker-compose up -d --build
 ```
 
 Then we can access:
