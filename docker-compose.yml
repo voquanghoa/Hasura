@@ -5,8 +5,12 @@ services:
     build:
         context: ./fileserver
         dockerfile: Dockerfile
+    volumes:
+      - ./fileserver/static:/usr/src/app
   postgres:
-    image: postgres:12
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "5432:5432"

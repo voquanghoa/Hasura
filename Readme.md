@@ -13,8 +13,6 @@ Then we can access:
 - Frontend [http://localhost:4200](http://localhost:4200)
 - Hasura backend [http://localhost:8080](http://localhost:8080)
 
-To edit the data.json file, execute the heroku CLI on the file-server 
-
 ```bash
 nano data.json
 ```
