@@ -28,7 +28,9 @@ services:
   frontend:
     restart: always
     ports:
-      - "4200:4200"
+      - "4200:3000"
+    volumes:
+      - ./frontend/src:/usr/src/app/src
     build:
       context: ./frontend
       dockerfile: Dockerfile

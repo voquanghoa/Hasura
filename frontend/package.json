@@ -2,8 +2,7 @@
   "name": "technology",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "dev-host": "svelte-kit dev --host --port 4200",
+    "dev": "svelte-kit dev --host",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
