@@ -40,15 +40,15 @@
         if (!slug) return
         try {
             apiState = ApiState.LOADING
-            const data = await fetchFindTechnology(slug)
+            const response = await fetchFindTechnology(slug)
 
-            if (!data.data.long_tails) {
+            if (!response.data.long_tails) {
                 apiState = ApiState.FAILED
                 return;
             }
 
-            const id = data.data.long_tails[0].json_id
-            technology = data.data.technologies.find(x => x.id === id);
+            const id = response.data.long_tails[0].json_id
+            technology = response.data.technologies.find(x => x.id === id);
             apiState = ApiState.SUCCESS
         } catch {
             apiState = ApiState.FAILED
