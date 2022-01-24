@@ -2,7 +2,7 @@
 
 ## Setup and run on Docker
 
-- Build the images and run with changes detection and reload for Frontend
+- Build the images and run with changes detection and reload for Frontend/FileServer
 
 ```bash
 docker-compose up -d --build
