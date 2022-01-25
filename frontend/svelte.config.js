@@ -9,7 +9,14 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-		target: '#svelte'
+		target: '#svelte',
+		vite: {
+			server: {
+				watch: {
+					usePolling: true,
+				},
+			}
+		}
 	}
 };
 
