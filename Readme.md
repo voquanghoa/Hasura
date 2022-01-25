@@ -5,17 +5,13 @@
 - Build the images and run with changes detection and reload for Frontend/FileServer
 
 ```bash
-docker-compose up -d --build
+startup.sh
 ```
 
 Then we can access:
 
-- Frontend [http://localhost:4200](http://localhost:4200)
+- Frontend [http://localhost:3000](http://localhost:3000)
 - Hasura backend [http://localhost:8080](http://localhost:8080)
-
-```bash
-nano data.json
-```
 
 # Useful commands
 
