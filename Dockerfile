@@ -9,5 +9,4 @@ ENV HASURA_GRAPHQL_ENABLED_LOG_TYPES="startup, http-log, webhook-log, websocket-
 
 WORKDIR /usr/src/app
 
-COPY ./metadata metadata
 COPY ./config.yaml .
